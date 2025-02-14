@@ -86,6 +86,10 @@ def log():
 # def forgotpass():
 #     return redirect(url_for('forgot'))
 
+# @app.route('/forgot')
+def forgot():
+    return render_template('forgotPassword.html')
+
 #routing to signing in process
 @app.route('/signin', methods=['POST'])
 def signin():
@@ -102,10 +106,6 @@ def signin():
     session["user_name"] = user["name"]  # Store user name in session
     return jsonify({"message": "Login Successful"}), 200
 
-# @app.route('/forgot')
-def forgot():
-    return render_template('forgotPassword.html')
-
 #routing to registration process url
 @app.route('/register', methods = ["POST"])
 def register():
@@ -121,7 +121,7 @@ def register():
     users.append(data)
     save_users(users)
 
-    return jsonify({"message": "User successfully registered"}), 200
+    return jsonify({"message": "User has successfully registered"}), 200
 
 #logout
 @app.route("/logout")

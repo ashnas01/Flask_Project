@@ -83,22 +83,22 @@
     </div>
 
     <!-- Bootstrap Modal for Messages -->
-    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="messageModalLabel">Notification</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="modalMessage">
+                <div class="modal-body" id="modalMessage"> -->
                     <!-- Message will be inserted here dynamically -->
-                </div>
+                <!-- </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -116,7 +116,7 @@
             let password = document.getElementById("pw").value;
 
             if (!email || !password) {
-                showModal("Please fill in all fields");
+                alert("Please fill in all fields");
                 return;
             }
 
@@ -129,30 +129,33 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.message === "Login Successful") {
-                        showModal(data.message, true);
-                    } else {
-                        showModal(data.message);
-                    }
+                    alert(data.message);
+                        if (data.message === "Login Successful") {
+                            window.location.href = "/"
+                                             //true
+                        } 
+                    // else {
+                    //     alert(data.message);
+                    // }
                 })
                 .catch(error => {
-                    showModal("An error occurred. Please try again.");
+                    // alert("An error occurred. Please try again.");
                     console.error("Error:", error);
                 });
         });
 
-        function showModal(message) {
-            document.getElementById("modalMessage").innerText = message;
-            let modal = new bootstrap.Modal(document.getElementById("messageModal"));
-            modal.show();
+        // function showModal(message) {
+        //     document.getElementById("modalMessage").innerText = message;
+        //     let modal = new bootstrap.Modal(document.getElementById("messageModal"));
+        //     modal.show();
 
-            if (redirect) {
-                setTimeout(() => {
-                    modal.hide();
-                    window.location.href = "/";
-                }, 2000);
-            }
-        }
+        //     if (redirect) {
+        //         setTimeout(() => {
+        //             modal.hide();
+        //             window.location.href = "/";
+        //         }, 2000);
+        //     }
+        // }
 
     </script>
 
