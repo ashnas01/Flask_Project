@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+</head>
+<body>
+    <div>
+        <h1>forgot Password</h1>
+        <label for="email">Email : </label><br>
+        <input type="email" id="email" placeholder="Enter your registered email"><br>
+        <button id="verify">verify</button>
+    </div>
+
+    <script>
+        document.getElementById("verify").addEventListener("click", function() {
+            let email = document.getElementById("email").value.trim();
+
+            if(!email) {
+                alert("Please fill the field");
+                return;
+            }
+
+            // Email validation
+            let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) {
+                alert("Invalid email format!");
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            let user = users.find(user => user.email === email);
+
+            if(!user) {
+                alert("Email not found")
+                return
+            }
+
+            let newPass = prompt("Enter Your new password : ")
+
+            if (!newPass) {
+                alert("Password cannot be empty!");
+                return;
+            }
+
+            let passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if(!passwordRegex.test(newPass)){
+                alert("Invalid password!!! password should minimum contain 8 characters including 1 Uppercase letter, 1 digit and 1 special character");
+                return
+            }
+
+            // Confirm password change
+            let confirmChange = confirm("Are you sure you want to change your password?");
+            if (!confirmChange) {
+                return;
+            }
+
+            user.password = newPass;
+            localStorage.setItem("users",JSON.stringify(users))
+
+            alert("New password is created!")
+            window.location.href = "login.html";
+        })
+    </script>
+</body>
+</html>

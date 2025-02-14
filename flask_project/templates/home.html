@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .home {
+            display: block;
+            text-align: center;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="home">
+        <h1>Home page</h1>
+        <button onclick="window.location.href = '/login'">Logout</button>
+        <br><br> 
+        <button class="btn btn-primary rounded-3" id = "showUsers">Show users</button>
+    
+        <table id="usersTable" style="display: none;">  <!--display: none is for not showing this table first-->
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Date of Birth</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    
+        <script>
+            document.getElementById("showUsers").addEventListener("click", function() {
+                fetch("/get_users")    // Request user data from Flask backend
+                .then(response => response.json())
+                .then(users => {
+                    let table = document.getElementById("usersTable")
+                    let tbody = table.querySelector("tbody")
+                    tbody.innerHTML = "";  // Clear previous data
+    
+                    users.forEach(user => {
+                        let row = `<tr>
+                            <td>${user.name}</td>
+                            <td>${user.dob}</td>
+                            <td>${user.phone}</td>
+                            <td>${user.email}</td> 
+                        </tr>`;
+                        tbody.innerHTML += row;
+                    });
+    
+                    table.style.display = "table"; // Show the table
+                })
+                .catch(error => console.error("Error:", error));
+                
+            })
+        </script>
+    </div>
+    
+</body>
+</html>
