@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Muhammed Ashik A",
+        "dob": "2001-11-01",
+        "phone": "7994022178",
+        "email": "ashik@gmail.com",
+        "password": "Ashik@123"
+    },
+    {
+        "name": "Arjun Sankar R",
+        "dob": "2001-03-21",
+        "phone": "0321458796",
+        "email": "arjun@gmail.com",
+        "password": "Arjun@123"
+    },
+    {
+        "name": "abhay",
+        "dob": "2000-04-02",
+        "phone": "2587414136",
+        "email": "abhay@gmail.com",
+        "password": "Abhay@123"
+    },
+    {
+        "name": "Noufiya N S",
+        "dob": "2008-09-15",
+        "phone": "9895670513",
+        "email": "noufiya@gmail.com",
+        "password": "Noufiya@123"
+    }
+]

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .navbar {
+            background: linear-gradient(45deg, #4A90E2, #9013FE);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            /* Adds a slight shadow */
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #ffffff !important;
+            /* Makes text white */
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #FFD700 !important;
+            /* Gold hover effect */
+        }
+
+
+        .home {
+            text-align: center;
+            padding: 20px;
+        }
+
+        table {
+            margin-top: 20px;
+        }
+
+        /* #showUsers {
+            margin: 5px;
+        } */
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <div class="home">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img class="d-inline-block align-text-top"
+                            src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="COMPANY" width="40"
+                            height="40">
+                        COMPANY
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Career</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Services
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Software Development</a></li>
+                                    <li><a class="dropdown-item" href="#">Hardware</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Others...</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- <form class="d-flex" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form> -->
+                        <form class="d-flex">
+                            <button class="btn btn-primary me-2" id="showUsers">Show Users</button>
+                            <a href="/logout" class="btn btn-danger me-2">Logout</a>
+                        </form>
+
+                    </div>
+                </div>
+            </nav>
+            <br><br>
+            <h1 class="mb-4">Welcome to COMPANY, {{ user_name}}</h1>
+
+            <!-- Logout Button -->
+            <!-- <a href="/login" class="btn btn-danger mb-3">Logout</a>
+            <br> -->
+            <!-- Show Users Button -->
+            <!-- <button class="btn btn-primary mb-3" id="showUsers">Show Users</button> -->
+
+            <!-- Filter and Table Container -->
+            <div id="usersContainer" style="display: none;">
+                <!-- Filter Input -->
+                <div class="mb-3">
+                    <select id="columnFilter" class="form-select">
+                        <option value="0">Full Name</option>
+                        <option value="1">Date of Birth</option>
+                        <option value="2">Phone</option>
+                        <option value="3">Email</option>
+                    </select>
+                    <input type="text" id="filterColumnInput" class="form-control mt-2"
+                        placeholder="Filter by selected column..." onkeyup="filterByColumn()">
+                </div>
+
+                <!-- Users Table -->
+                <div class="table-responsive">
+                    <table id="usersTable" class="table table-bordered table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Date of Birth</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function filterByColumn() {
+            let columnIndex = document.getElementById("columnFilter").value;
+            let input = document.getElementById("filterColumnInput").value.toLowerCase();
+            let table = document.getElementById("usersTable");
+            let rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) {
+                let cell = rows[i].getElementsByTagName("td")[columnIndex];
+                if (cell) {
+                    let cellText = cell.textContent.toLowerCase();
+                    rows[i].style.display = cellText.includes(input) ? "" : "none";
+                }
+            }
+        }
+
+        document.getElementById("showUsers").addEventListener("click", function (event) {
+            event.preventDefault();
+            let usersContainer = document.getElementById("usersContainer");
+            let table = document.getElementById("usersTable");
+            let button = this;
+
+            if (usersContainer.style.display === "none" || usersContainer.style.display === "") {
+                fetch("/get_users")
+                    .then(response => response.json())
+                    .then(users => {
+                        let tbody = table.querySelector("tbody");
+                        tbody.innerHTML = "";  // Clear previous data
+
+                        if (users.length === 0) {
+                            tbody.innerHTML = `<tr>
+                                <td colspan="4" class="text-center text-danger">No users found</td>
+                            </tr>`;
+                        } else {
+                            users.forEach(user => {
+                                let row = `<tr>
+                            <td>${user.name}</td>
+                            <td>${user.dob}</td>
+                            <td>${user.phone}</td>
+                            <td>${user.email}</td>
+                        </tr>`;
+                                tbody.innerHTML += row;
+                            });
+                        }
+
+                        usersContainer.style.display = "block"; // Show table & filters
+                        button.textContent = "Hide Users";
+                    })
+                    .catch(error => console.error("Error:", error));
+            } else {
+                usersContainer.style.display = "none"; // Hide table & filters
+                button.textContent = "Show Users";
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
