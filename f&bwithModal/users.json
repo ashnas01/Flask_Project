@@ -1,0 +1,93 @@
+[
+    {
+        "name": "Muhammed Ashik A",
+        "dob": "2001-11-01",
+        "phone": "7994022178",
+        "email": "ashik@gmail.com",
+        "password": "Ashik@123"
+    },
+    {
+        "name": "Arjun Sankar R",
+        "dob": "2001-03-21",
+        "phone": "0321458796",
+        "email": "arjun@gmail.com",
+        "password": "Arjun@123"
+    },
+    {
+        "name": "abhay",
+        "dob": "2000-04-02",
+        "phone": "2587414136",
+        "email": "abhay@gmail.com",
+        "password": "Abhay@123"
+    },
+    {
+        "name": "Noufiya N S",
+        "dob": "2008-09-15",
+        "phone": "9895670513",
+        "email": "noufiya@gmail.com",
+        "password": "Noufiya@123"
+    },
+    {
+        "name": "John Abraham",
+        "dob": "1999-02-05",
+        "phone": "9630147852",
+        "email": "johnabraham@gmail.com",
+        "password": "Johnabraham@123"
+    },
+    {
+        "name": "Jacob Antony",
+        "dob": "1998-06-05",
+        "phone": "9360147852",
+        "email": "jacobantony@gmail.com",
+        "password": "Jaconantony@123"
+    },
+    {
+        "name": "Noufal",
+        "dob": "2004-06-05",
+        "phone": "9360147855",
+        "email": "Noufal@gmail.con",
+        "password": "Noufal@123"
+    },
+    {
+        "name": "sayed",
+        "dob": "2000-06-05",
+        "phone": "9360647855",
+        "email": "sayed@gmail.con",
+        "password": "Sayed@123"
+    },
+    {
+        "name": "anandhu",
+        "dob": "2001-06-05",
+        "phone": "8360647855",
+        "email": "anandhu@gmail.con",
+        "password": "Anandhu@123"
+    },
+    {
+        "name": "jack",
+        "dob": "2001-06-06",
+        "phone": "8360687855",
+        "email": "jack@gmail.con",
+        "password": "Jack@123"
+    },
+    {
+        "name": "jerry",
+        "dob": "1995-05-05",
+        "phone": "8520136479",
+        "email": "jerry@gmail.com",
+        "password": "Jerry@123"
+    },
+    {
+        "name": "Reshmi",
+        "dob": "1999-08-05",
+        "phone": "1472580369",
+        "email": "reshmi@gmail.com",
+        "password": "Reshmi@123"
+    },
+    {
+        "name": "James",
+        "dob": "1998-07-01",
+        "phone": "3214569870",
+        "email": "james@gmail.com",
+        "password": "James@123"
+    }
+]
