@@ -262,32 +262,32 @@
             let passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
             if (!name || !dob || !phone || !email || !password || !confirm_password) {
-                showMessage("Please fill all the fields!");
+                showMessage("Please fill all the fields!", "danger");
                 return;
             }
 
             if (!nameRegex.test(name)) {
-                showMessage("Invalid Name! Only letters and spaces are allowed.");
+                showMessage("Invalid Name! Only letters and spaces are allowed.", "danger");
                 return;
             }
 
             if (!phoneregex.test(phone)) {
-                showMessage("Invalid Phone Number! Must be 10 digits.");
+                showMessage("Invalid Phone Number! Must be 10 digits.", "danger");
                 return;
             }
 
             if (!emailRegex.test(email)) {
-                showMessage("Invalid Email Format!");
+                showMessage("Invalid Email Format!", "danger");
                 return;
             }
 
             if (!passwordRegex.test(password)) {
-                showMessage("Password must be 8+ characters with 1 uppercase, 1 number, and 1 special character.");
+                showMessage("Password must be 8+ characters with 1 uppercase, 1 number, and 1 special character.", "danger");
                 return;
             }
 
             if (password !== confirm_password) {
-                showMessage("Passwords do not match!");
+                showMessage("Passwords do not match!", "danger");
                 return;
             }
 

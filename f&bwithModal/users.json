@@ -89,5 +89,12 @@
         "phone": "3214569870",
         "email": "james@gmail.com",
         "password": "James@123"
+    },
+    {
+        "name": "George",
+        "dob": "2002-02-01",
+        "phone": "2584158236",
+        "email": "george@gmail.com",
+        "password": "George@123"
     }
 ]
